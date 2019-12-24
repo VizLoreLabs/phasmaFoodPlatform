@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+PURPLE='\033[0;35m'
+NC='\033[0m'
+CWD=$(pwd)
+VENV_DIR="${CWD}/.venv/"
+VER_MAJOR=$(python -c"import sys; print(sys.version_info.major)")
+VER_MINOR=$(python -c"import sys; print(sys.version_info.minor)")
+
+if [[ "$VER_MAJOR" -eq 3 && "$VER_MINOR" -ge 6 ]]; then
+  python -m venv .venv
+  echo -e "${GREEN} STEP 1 SUCCESS ${NC} -- Virtual environment created."
+elif [[ "$VER_MAJOR" -le 3 && "$VER_MINOR" -lt 6 ]]; then
+  echo -e "${RED} STEP 1 ERROR ${NC} -- Python version does't match required version 3.6.0 or higher!"
+  exit
+else
+  echo -e "${RED} STEP 1 ERROR ${NC} -- There is no Python on available!"
+  exit
+fi
+
+if [ -d "${VENV_DIR}" ] && source ./.venv/bin/activate && [[ "$VIRTUAL_ENV" != "" ]] ; then
+  echo -e "${GREEN} STEP 2 SUCCESS ${NC} -- Virtual environment activated."
+else
+  echo -e "${RED} STEP 2 ERROR ${NC} -- Something went wrong .venv folder missing!"
+  exit
+fi
+
+if pip install -U pip setuptools; then
+  echo -e "${GREEN} STEP 3 SUCCESS ${NC} -- Upgraded pip and setuptools."
+else
+  echo -e "${PURPLE} STEP 3 WARNING ${NC} -- Something went wrong pip and setuptools not upgraded!"
+fi
+
+if pip install -r requirements/production.txt; then
+  echo -e "${GREEN} STEP 4 SUCCESS ${NC} -- PhasmaFood dependencies installed."
+else
+  echo -e "${RED} STEP 4 ERROR ${NC} -- Something went wrong, PhasmaFood dependencies not installed!"
+fi
