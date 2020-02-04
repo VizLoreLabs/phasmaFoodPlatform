@@ -23,6 +23,9 @@ The PhasmaFOOD system performs spectroscopy and photonics based sensing of param
 The PhasmaFOOD system can be used across food supply chains from farm to fork. Stakeholders may utilize the system to perform on the spot food safety and quality analysis based on the PhasmaFOOD use cases or create their own use cases based on the PhasmaFOOD technology.
 The PhasmaFOOD cloud platform is the focal point of all sensory and contextual data coming from the PhasmaFOOD sensing device, the mobile application and 3rd party data sources. The cloud platform hosts the PhasmaFOOD cloud database with all reference data sets necessary for performing food analysis required by the project use cases. It operates data analysis pipelines and rule engine for reactive and proactive decision making.
 
+Source code for the PhasmaFOOD Android application can be found here:
+https://github.com/VizLoreLabs/phasmaFoodMobileApp
+
 For more information please visit:
 http://www.phasmafood.eu/
 
